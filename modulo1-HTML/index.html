@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo 1 - HTML</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <nav class="navegacion">
+        <div class="icono-menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 18H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 12H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 6H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <div class="enlaces">
+            <p class="enlaces-item">MODA MUJER</p>
+            <p class="enlaces-item">MODA HOMBRE</p>
+            <p class="enlaces-item">NUEVA COLECCION</p>
+            <p class="enlaces-item">COLECCIONES ESPECIALES</p>
+        </div>
+
+        <div class="iconos-derecha">
+            <div class="enlaces-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="#212429" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="#212429" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="enlaces-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.84 4.60999C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.60999L12 5.66999L10.94 4.60999C9.9083 3.5783 8.50903 2.9987 7.05 2.9987C5.59096 2.9987 4.19169 3.5783 3.16 4.60999C2.1283 5.64169 1.54871 7.04096 1.54871 8.49999C1.54871 9.95903 2.1283 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.351 11.8792 21.7563 11.2728 22.0329 10.6053C22.3095 9.93789 22.4518 9.22248 22.4518 8.49999C22.4518 7.77751 22.3095 7.0621 22.0329 6.39464C21.7563 5.72718 21.351 5.12075 20.84 4.60999V4.60999Z" stroke="#212429" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>                    
+            </div>
+            <div class="enlaces-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 16H7C6.73478 16 6.48043 15.8946 6.29289 15.7071C6.10536 15.5196 6 15.2652 6 15C6 14.7348 6.10536 14.4804 6.29289 14.2929C6.48043 14.1054 6.73478 14 7 14H17.44C18.1087 14 18.7582 13.7767 19.2854 13.3654C19.8126 12.9542 20.1873 12.3786 20.35 11.73L22 5.24C22.0375 5.09241 22.0407 4.93821 22.0095 4.78917C21.9783 4.64013 21.9135 4.50018 21.82 4.38C21.7227 4.25673 21.5978 4.1581 21.4554 4.09208C21.3129 4.02606 21.1569 3.99452 21 4H6.76C6.55369 3.41645 6.17193 2.911 5.66707 2.55294C5.1622 2.19488 4.55894 2.00174 3.94 2H3C2.73478 2 2.48043 2.10536 2.29289 2.29289C2.10536 2.48043 2 2.73478 2 3C2 3.26522 2.10536 3.51957 2.29289 3.70711C2.48043 3.89464 2.73478 4 3 4H3.94C4.16843 3.99334 4.39226 4.06513 4.57421 4.20341C4.75615 4.34169 4.88525 4.53812 4.94 4.76L5 5.24L6.73 12C5.93435 12.0358 5.18551 12.3862 4.64822 12.9741C4.11093 13.5621 3.8292 14.3394 3.865 15.135C3.9008 15.9306 4.25121 16.6795 4.83914 17.2168C5.42707 17.7541 6.20435 18.0358 7 18H7.18C7.01554 18.4531 6.96269 18.9392 7.02593 19.4171C7.08917 19.895 7.26665 20.3506 7.54332 20.7454C7.81999 21.1401 8.18772 21.4624 8.61535 21.6849C9.04299 21.9074 9.51795 22.0235 10 22.0235C10.4821 22.0235 10.957 21.9074 11.3846 21.6849C11.8123 21.4624 12.18 21.1401 12.4567 20.7454C12.7334 20.3506 12.9108 19.895 12.9741 19.4171C13.0373 18.9392 12.9845 18.4531 12.82 18H15.18C15.0155 18.4531 14.9627 18.9392 15.0259 19.4171C15.0892 19.895 15.2666 20.3506 15.5433 20.7454C15.82 21.1401 16.1877 21.4624 16.6154 21.6849C17.043 21.9074 17.5179 22.0235 18 22.0235C18.4821 22.0235 18.957 21.9074 19.3846 21.6849C19.8123 21.4624 20.18 21.1401 20.4567 20.7454C20.7334 20.3506 20.9108 19.895 20.9741 19.4171C21.0373 18.9392 20.9845 18.4531 20.82 18H21C21.2652 18 21.5196 17.8946 21.7071 17.7071C21.8946 17.5196 22 17.2652 22 17C22 16.7348 21.8946 16.4804 21.7071 16.2929C21.5196 16.1054 21.2652 16 21 16ZM19.72 6L18.41 11.24C18.3552 11.4619 18.2262 11.6583 18.0442 11.7966C17.8623 11.9349 17.6384 12.0067 17.41 12H8.78L7.28 6H19.72ZM10 20C9.80222 20 9.60888 19.9414 9.44443 19.8315C9.27998 19.7216 9.15181 19.5654 9.07612 19.3827C9.00043 19.2 8.98063 18.9989 9.01921 18.8049C9.0578 18.6109 9.15304 18.4327 9.29289 18.2929C9.43275 18.153 9.61093 18.0578 9.80491 18.0192C9.99889 17.9806 10.2 18.0004 10.3827 18.0761C10.5654 18.1518 10.7216 18.28 10.8315 18.4444C10.9414 18.6089 11 18.8022 11 19C11 19.2652 10.8946 19.5196 10.7071 19.7071C10.5196 19.8946 10.2652 20 10 20ZM18 20C17.8022 20 17.6089 19.9414 17.4444 19.8315C17.28 19.7216 17.1518 19.5654 17.0761 19.3827C17.0004 19.2 16.9806 18.9989 17.0192 18.8049C17.0578 18.6109 17.153 18.4327 17.2929 18.2929C17.4327 18.153 17.6109 18.0578 17.8049 18.0192C17.9989 17.9806 18.2 18.0004 18.3827 18.0761C18.5654 18.1518 18.7216 18.28 18.8315 18.4444C18.9414 18.6089 19 18.8022 19 19C19 19.2652 18.8946 19.5196 18.7071 19.7071C18.5196 19.8946 18.2652 20 18 20Z" fill="#212429"/>
+                </svg>
+            </div>
+        </div>
+    </nav>
+
+    <section class="body">
+        <p class="titulo-principal texto-bold">Nuevas Colecciones</p>
+        <div class="cards-container">
+
+            <div class="item card-container">
+                <img src="./assets/img/image-3.jpg" title="" alt="imagen de chica con vestido">
+                <div class="card-text">
+                    <p>Vestido</p>
+                    <p class="texto-bold">44,99 €</p>
+                </div>
+            </div>
+
+            <div class="item card-container">
+                <img src="./assets/img/image-6.jpg" title="" alt="imagen de chica con vestido">
+                <div class="card-text">
+                    <p>Camisa</p>
+                    <p class="texto-bold">79,99 €</p>
+                </div>
+            </div>
+
+            <div class="item card-container">
+                <img src="./assets/img/image-4.jpg" title="" alt="imagen de chica con vestido">
+                <div class="card-text">
+                    <p>Vaqueros</p>
+                    <p class="texto-bold">34,99 €</p>
+                </div>
+            </div>
+
+            <div class="item card-container">
+                <img src="./assets/img/image-5.jpg" title="" alt="imagen de chica con vestido">
+                <div class="card-text">
+                    <p>Polo</p>
+                    <p class="texto-bold">44,95 €</p>
+                </div>
+            </div>
+
+            <div class="item card-container">
+                <img src="./assets/img/image-1.jpg" title="" alt="imagen de chica con vestido">
+                <div class="card-text">
+                    <p>Camisa</p>
+                    <p class="texto-bold">25,00 €</p>
+                </div>
+            </div>
+
+            <div class="item card-container">
+                <img src="./assets/img/image-2.jpg" title="" alt="imagen de chica con vestido">
+                <div class="card-text">
+                    <p>Camiseta</p>
+                    <p class="texto-bold">22,99 €</p>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+    <footer>
+        <div class="items-footer">
+            <div class="iconos-footer">
+                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_1_82)">
+                    <path d="M26.1 29.6C28.033 29.6 29.6 28.033 29.6 26.1C29.6 24.167 28.033 22.6 26.1 22.6C24.167 22.6 22.6 24.167 22.6 26.1C22.6 28.033 24.167 29.6 26.1 29.6Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.90002 29.6C9.83302 29.6 11.4 28.033 11.4 26.1C11.4 24.167 9.83302 22.6 7.90002 22.6C5.96703 22.6 4.40002 24.167 4.40002 26.1C4.40002 28.033 5.96703 29.6 7.90002 29.6Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M22.6 11.4H28.2L32.4 15.6V22.6H22.6V11.4Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M22.6 4.40002H1.60004V22.6H22.6V4.40002Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_1_82">
+                    <rect width="33.6" height="33.6" fill="white" transform="translate(0.200012 0.200012)"/>
+                    </clipPath>
+                    </defs>
+                </svg>
+            </div>
+            <p class="texto-footer">Entrega</p>
+        </div>
+
+        <hr class="has-color-white">
+
+        <div class="items-footer">
+            <p class="texto-footer">Devolución y cambios</p>
+        </div>
+
+        <hr class="has-color-white">
+        
+        <div class="items-footer">
+            <div class="iconos-footer">
+                <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M29.6666 21.888V26.088C29.6682 26.4779 29.5883 26.8639 29.4321 27.2211C29.2759 27.5783 29.0468 27.899 28.7595 28.1626C28.4722 28.4262 28.133 28.6269 27.7637 28.7518C27.3943 28.8767 27.0029 28.9231 26.6146 28.888C22.3066 28.4199 18.1684 26.9478 14.5326 24.59C11.15 22.4405 8.2821 19.5727 6.13262 16.19C3.76659 12.5377 2.29416 8.37941 1.83462 4.05201C1.79964 3.66487 1.84565 3.27468 1.96973 2.90629C2.0938 2.5379 2.29322 2.19938 2.5553 1.91228C2.81737 1.62519 3.13635 1.39581 3.49193 1.23874C3.84751 1.08168 4.2319 1.00038 4.62062 1.00001H8.82062C9.50005 0.993327 10.1587 1.23392 10.6739 1.67696C11.189 2.12 11.5255 2.73524 11.6206 3.40801C11.7979 4.75211 12.1267 6.07183 12.6006 7.34201C12.789 7.84311 12.8298 8.38769 12.7181 8.91125C12.6064 9.4348 12.347 9.91537 11.9706 10.296L10.1926 12.074C12.1856 15.579 15.0877 18.481 18.5926 20.474L20.3706 18.696C20.7513 18.3196 21.2318 18.0602 21.7554 17.9485C22.2789 17.8369 22.8235 17.8777 23.3246 18.066C24.5948 18.54 25.9145 18.8687 27.2586 19.046C27.9387 19.142 28.5598 19.4845 29.0038 20.0085C29.4478 20.5325 29.6837 21.2014 29.6666 21.888Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <p class="texto-footer">+375 (29) 749-18-23</p>
+        </div>
+
+        <hr class="has-color-white">
+
+        <div class="items-footer">
+            <div class="iconos-footer">
+                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.8 5.79999H28.2C29.74 5.79999 31 7.05999 31 8.59999V25.4C31 26.94 29.74 28.2 28.2 28.2H5.8C4.26 28.2 3 26.94 3 25.4V8.59999C3 7.05999 4.26 5.79999 5.8 5.79999Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M31 8.60004L17 18.4L3 8.60004" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <p class="texto-footer">shop@omix.com</p>
+        </div>
+
+        <hr class="has-color-white">
+    </footer>
+    
+</body>
+</html>

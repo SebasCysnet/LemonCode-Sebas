@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+p{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300 ;
+    font-size: 13px;
+}
+/* REGULAR   font-weight: 400 ; */
+/* BOLD      font-weight: 700 ; */
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.texto-bold{
+    font-weight: 700 ;
+}
+.has-color-white{
+    color: #ffffff;
+}
+.has-text-small{
+    font-weight: 300 ;
+    font-size: 13px;
+}
+/* ---------------------- START NAV */
+.navegacion{
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    border-bottom: solid rgb(118, 118, 118);
+    background-color: #ffffff;
+    box-shadow: 0px 0px 15px rgb(118, 118, 118);
+}
+.enlaces, .iconos-derecha{
+    display: none;
+}
+/* ---------------------- END NAV */
+
+
+/* ---------------------- START BODY */
+.body{
+    margin: 16px 16px;
+}
+.titulo-principal{
+    font-size: 32px;
+}
+.cards-container{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 32px;
+}
+.card-container{
+    padding: 16px ;
+}
+
+img{
+    border-radius: 12px;
+    filter: grayscale(100%);
+    transition: filter 0.2s ease-in-out;
+}
+img:hover {
+    filter: grayscale(0%);
+}
+.card-text{
+    padding: 32px 0px;
+    display: flex;
+    justify-content: space-around;
+}
+
+/* ---------------------- END BODY */
+
+
+/* ---------------------- START FOOTER */
+footer{
+    background-color: #212429;
+    color: #ffffff;
+    padding: 10px 32px 32px;
+    margin: 16px;
+}
+.items-footer{
+    display: flex;
+    margin: 13px 0px;
+    align-items: center;
+}
+.iconos-footer{
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    margin-right: 13px;
+}
+.texto-footer{
+    font-weight: 700 ;
+}
+/*---------------------- END FOOTER */
+
+@media (min-width: 920px ){
+/* ---------------------- START NAV */
+    .navegacion{
+        justify-content: space-around;
+    }
+    .enlaces, .iconos-derecha{
+        display: flex;
+        align-items: center;
+    }
+    .enlaces-item{
+        margin: 0px 10px;
+        font-weight: 300 ;
+        font-size: 13px;
+    }
+/* ---------------------- END NAV */
+
+
+/* ---------------------- START BODY */
+    .body{
+        margin: 32px 16px 0px;
+    }
+
+    .cards-container{
+        display: flex;
+        flex-direction: row;
+        padding: 32px 100px 0px;
+    }
+
+    img{
+        max-width: 100%;
+        max-height: 300px;
+        object-fit: contain;
+    }
+
+    .card-container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-text{
+        justify-content: space-around;
+    }
+/* ---------------------- END BODY */
+
+
+/* ---------------------- START FOOTER */
+    footer{
+        display: flex;
+        justify-content: space-around;
+        margin: 0;
+        padding: 16px;
+    }
+
+    footer hr{
+        display: none;
+    }
+
+    .texto-footer{
+        font-weight: 300 ;
+    }
+}
+/* ---------------------- END FOOTER */
