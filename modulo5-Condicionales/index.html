@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div class="turno-display">
+      <p>+ <span id="puntuacionDOMCarta">0</span></p>
+      <div class="seccion-contador">
+        <img id="imgCarta" src="https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg" alt="carta boca abajo">
+        <button id="dameCarta" class="visible">Dame carta</button>
+        <button id="siguienteCarta" class="oculto">Siguiente carta</button>
+      </div>
+
+      <div>
+        <br>
+        <p id="mensajito" class="texto-turno" style="font-size: medium;">no te pases de 7,5</p>
+        <p class="texto-turno">Tu puntuacion : <span id="puntuacionUsuario">0</span></p>
+      </div>
+
+      <div>
+        <button id="retirarse" class="visible"> Retirarse</button>
+        <button id="volver" class="oculto"> Volver</button>
+      </div>
+
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
