@@ -1,0 +1,71 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #e0e0e0;
+}
+
+header {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.filter-section {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.filter-section input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 50%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.filter-section button {
+  padding: 0.5rem 1rem;
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.card {
+  background-color: white;
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 1rem;
+  width: 300px;
+  align-items: center;
+}
+
+.card img {
+  width: 140px;
+  height: 230px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.card-speciality,
+.card-skills {
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+}
