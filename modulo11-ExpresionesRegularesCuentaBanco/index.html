@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>validador de IBAN</title>
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="input-section">
+        <h1>Introduzca el IBAN</h1>
+        <textarea id="iban-input" placeholder="Escribe tu IBAN aquí"></textarea>
+        <button id="validate-button">Validar IBAN</button>
+      </div>
+
+      <div class="result-section">
+        <p><strong>IBAN bien formado:</strong> <span id="iban-formed"></span></p>
+        <p><strong>El IBAN es válido:</strong> <span id="iban-valid"></span></p>
+        <p><strong>Banco:</strong> <span id="bank-code"></span></p>
+        <p><strong>Código Sucursal:</strong> <span id="branch-code"></span></p>
+        <p><strong>Dígito de Control:</strong> <span id="control-digit"></span></p>
+        <p><strong>Número de Cuenta:</strong> <span id="account-number"></span></p>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
