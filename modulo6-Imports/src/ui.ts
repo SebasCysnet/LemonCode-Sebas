@@ -1,4 +1,5 @@
 import { store } from "./model";
+import { generadorNumeroAleatorio, actualizarPtosUsuario, actualizarCarta } from "./motor";
 
 const botonDOMVolver = document.getElementById("volver")
 const botonDameCarta = document.getElementById("dameCarta")
@@ -128,4 +129,54 @@ export function actualizaDOMMensajito() {
         botonDOMSiguienteCarta.style.display = "block"
         botonDOMVolver.style.display = "block";
     }
+}
+
+
+// funcion dame Carta
+export function dameCarta() {
+    // elige un numero del 1 al 12 y lo capturamos en una variable
+    store.carta = generadorNumeroAleatorio(10)
+    console.log(`ha salido la carta ${store.carta}`)
+
+    // ejecutamos funcion de actualizar ptos del usuario si esta en pleno juego
+    actualizarPtosUsuario(store.carta)
+
+    // ejecutamos funcion de actualizar la imagen y los punos
+    actualizarCarta(store.carta)
+}
+
+// funcion siguiente Carta
+export function siguienteCarta() {
+    store.carta = generadorNumeroAleatorio(10)
+    console.log(`ha salido la carta ${store.carta}`)
+
+    // ejecutamos funcion de actualizar la imagen y los punos
+    actualizarCarta(store.carta)
+}
+
+// funcion volver
+export function volver() {
+    actualizaBotonInicio()
+
+    // resetear carta
+    actualizarCarta(0)
+    mostrarCarta(0)
+
+    // resetear mensaje
+    cambioMensajito("no te pases de 7,5", 2)
+}
+
+// funcion retirarse
+export function retirarse() {
+    if (store.puntuacionActual <= 4) {
+        cambioMensajito("Has sido muy conservador", 1 )
+    } else if (store.puntuacionActual > 4 && store.puntuacionActual <= 5) {
+        cambioMensajito("Te ha entrado el canguelo eh?", 1)
+    } else if (store.puntuacionActual > 5 && store.puntuacionActual <= 7) {
+        cambioMensajito("Casi casi...", 1)
+    } else {
+        cambioMensajito("No deberias ver esto", 3)
+    }
+
+    actualizaDOMMensajito()
 }

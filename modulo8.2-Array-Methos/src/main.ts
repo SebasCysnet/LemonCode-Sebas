@@ -121,21 +121,20 @@ const esPacienteDePediatria = (pacientes: Pacientes): boolean => {
     return pacientes.especialidad === "Pediatra";
 };
 
-const reasignaEspecialidadAMedicoFamilia = (pacientes: Pacientes): void => {
-    pacientes.especialidad = "Medico de familia";
-};
-
 //@ts-ignore
 function reasignaPacientesAMedicoFamilia(pacientes: Pacientes[]): Pacientes[]{
     // filtramos los pacientes de pediatria y los guardamos en un nuevo array
     const pacientesPediatria = pacientes.filter(esPacienteDePediatria);
 
     // Reasignar especialidad a cada paciente
-    pacientesPediatria.forEach(reasignaEspecialidadAMedicoFamilia);
+    pacientesPediatria.map(pacientes => ({ 
+        ...pacientes, 
+        especialidad: "Medico de familia" 
+    }));
 
     return pacientesPediatria;
 };
-// console.log(reasignaPacientesAMedicoFamilia(pacientes));
+console.log(reasignaPacientesAMedicoFamilia(pacientes));
 
 // apartado 4 mandar el pedriatra a casa o no
 //@ts-ignore
@@ -182,9 +181,9 @@ const incrementarContador = (contador: NumeroPacientesPorEspecialidad, especiali
 function cuentaPacientesPorEspecialidad(pacientes: Pacientes[]): NumeroPacientesPorEspecialidad {
     const contador = inicializarContadorEspecialidades();
 
-    pacientes.forEach(paciente => {
-        incrementarContador(contador, paciente.especialidad);
-    });
+    pacientes.reduce((acc, paciente) => {incrementarContador(contador, paciente.especialidad);
+        return acc;
+    }, contador);
 
     return contador;
 };

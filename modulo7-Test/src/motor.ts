@@ -2,37 +2,25 @@ import { store } from "./model";
 
 // Actualizacion de PTOS del usuario
 function actualizarPtosUsuario(cartaSeleccionada:number) {
-    // actualizamos la variable de los puntos actuales del usuario
-    if (cartaSeleccionada >= 10 ) {
-        store.puntuacionActual += 0.5
-    } else {
-        store.puntuacionActual += cartaSeleccionada
-    }
-    
-    console.warn(`actualmente tienes ${store.puntuacionActual} puntos`)
+    store.puntuacionActual += cartaSeleccionada >= 10 ? 0.5 : cartaSeleccionada;
+    console.warn(`actualmente tienes ${store.puntuacionActual} puntos`);
 }
 
 // Actualizacion de nueva carta
 function actualizarCarta(cartaSeleccionada:number) {
-    if (cartaSeleccionada >= 10 ) {
-        store.puntuacionNuevaCarta = 0.5
-    } else {
-        store.puntuacionNuevaCarta = cartaSeleccionada
-    }
+    store.puntuacionNuevaCarta = cartaSeleccionada >= 10 ? 0.5 : cartaSeleccionada;
 }
 
+// saca nuemro Aleatorio
+export function numeroAleatorio(NumMax:number) :number {
+    return Math.floor(Math.random() * NumMax) +1
+}
 // Generador de numero del 1 al 12
-export function generadorNumeroAleatorio(NumMax:number) {
-    let numeroAzar = Math.floor(Math.random() * NumMax) +1
-    // si el numero es mayor de 7 suma 2            // sota= 10 -- Caballo= 11 -- rey= 12
-    if (numeroAzar > 7) {
-        return numeroAzar + 2
-    } else {
-        return numeroAzar
-    }
+export function comprobadorCarta(NumeroCarta:number) {
+    return NumeroCarta > 7 ? NumeroCarta + 2 : NumeroCarta;
 }
 
-export function comprobarisWin(NumeroActual:number) {
+export function comprobarisWin(NumeroActual:number) :number {
     if (NumeroActual == 7.5) {
         return 1
     } if (NumeroActual > 7.5) {
@@ -44,7 +32,8 @@ export function comprobarisWin(NumeroActual:number) {
 // funcion dame Carta
 export function dameCarta() {
     // elige un numero del 1 al 12 y lo capturamos en una variable
-    store.carta = generadorNumeroAleatorio(10)
+    let nuevoNumero = numeroAleatorio(10)
+    store.carta = comprobadorCarta(nuevoNumero)
     console.log(`ha salido la carta ${store.carta}`)
 
     // ejecutamos funcion de actualizar ptos del usuario si esta en pleno juego
@@ -58,7 +47,8 @@ export function dameCarta() {
 
 // funcion siguiente Carta
 export function siguienteCarta() {
-    store.carta = generadorNumeroAleatorio(10)
+    let nuevoNumero = numeroAleatorio(10)
+    store.carta = comprobadorCarta(nuevoNumero)
     console.log(`ha salido la carta ${store.carta}`)
 
     // ejecutamos funcion de actualizar la imagen y los punos

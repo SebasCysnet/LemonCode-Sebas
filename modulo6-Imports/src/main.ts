@@ -1,7 +1,6 @@
 import "./style.css";
-import { dameCarta, siguienteCarta, volver, retirarse } from "./motor";
+import { dameCarta, siguienteCarta, volver, retirarse } from "./ui";
 
-// no entiendo a que se refiere con "instanceof"
 const botonDOMVolver = document.getElementById("volver")
 const botonDameCarta = document.getElementById("dameCarta")
 const botonDOMRetirarse = document.getElementById("retirarse")

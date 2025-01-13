@@ -2,33 +2,46 @@ import "./style.css";
 import { productos, LineaTicket, ResultadoLineaTicket, IvaDeProductos, ResultadoLineaTiket, tiketFinalObjeto, resultadosTotales, ResultadoTotalTicket, TotalPorTipoIva, TipoIva } from "./model";
 
 // Calcula el IVA
-function calcularIVA(precioTotalSinIva: number, procentajeDeIva: number): number {
-    let iva = (precioTotalSinIva * procentajeDeIva)/100;
-    //console.log(`el Iva del producto sale a ${iva`)
-    return iva
+export function calcularIVA(precioTotalSinIva: number, procentajeDeIva: number): number {
+    return (precioTotalSinIva * procentajeDeIva)/100;
+}
+
+export function asociarTipoIvaYCalcular(tipoIva: string, precioTotalSinIva:number): number {
+    let respuesta:number = 0
+    switch (tipoIva) {
+        case "general":
+            respuesta = calcularIVA(precioTotalSinIva, 21)
+            break;
+        case "reducido":
+            respuesta = calcularIVA(precioTotalSinIva, 10)
+            break;
+        case "superreducidoA":
+            respuesta = calcularIVA(precioTotalSinIva, 5)
+            break;
+        case "superreducidoB":
+            respuesta = calcularIVA(precioTotalSinIva, 4)
+            break;
+        case "superreducidoC":
+            respuesta = calcularIVA(precioTotalSinIva, 4)
+            break;
+    
+        default:
+            throw new Error("Tipo de IVA no válido");
+    }
+    return respuesta
 }
 
 // Calcula el precio con IVA
-function calcularPrecioConIva(precioTotalSinIva: number, tipoIvaString: TipoIva):number {
+export function calcularPrecioConIva(precioTotalSinIva: number, tipoIvaString: TipoIva):number {
     let precioTotal:number;
-    let iva:TotalPorTipoIva = { tipoIva: tipoIvaString, cuantia : 0 }
-
-    if (tipoIvaString == "general") {
-        iva.cuantia = calcularIVA(precioTotalSinIva, 21)
-        precioTotal = precioTotalSinIva + iva.cuantia
-    } else if (tipoIvaString == "reducido") {
-        iva.cuantia = calcularIVA(precioTotalSinIva, 10);
-        precioTotal = precioTotalSinIva + iva.cuantia;
-    } else if (tipoIvaString == "superreducidoA") {
-        iva.cuantia = calcularIVA(precioTotalSinIva, 5);
-        precioTotal = precioTotalSinIva + iva.cuantia;
-    } else if (tipoIvaString == "superreducidoB") {
-        iva.cuantia = calcularIVA(precioTotalSinIva, 4);
-        precioTotal = precioTotalSinIva + iva.cuantia;
-    } else {
-        iva.cuantia = 0;
-        precioTotal = precioTotalSinIva; // Sin IVA
+    let iva:TotalPorTipoIva = { 
+        tipoIva: tipoIvaString, 
+        cuantia : 0 
     }
+    // asociamos el tipo de iva que va a ser
+    iva.cuantia = asociarTipoIvaYCalcular(tipoIvaString, precioTotalSinIva)
+    // sumamos el precio total sin el iva con el precio del IVA
+    precioTotal = precioTotalSinIva + iva.cuantia
 
     // lo metemos en el array de Iva´s
     IvaDeProductos.push(iva)
@@ -36,65 +49,78 @@ function calcularPrecioConIva(precioTotalSinIva: number, tipoIvaString: TipoIva)
     return precioTotal ;
 }
 
+function calularPrecioSinIva(cantidad:number, precio:number):number {
+    return cantidad * precio
+}
+
+function crearLineaTicket(element: LineaTicket): ResultadoLineaTicket {
+    const lineaTicket: ResultadoLineaTicket = {
+        nombre: element.producto.nombre,
+        cantidad: element.cantidad,
+        tipoIva: element.producto.tipoIva,
+        precionSinIva: calularPrecioSinIva(element.cantidad, element.producto.precio),
+        precioConIva: calcularPrecioConIva(
+            calularPrecioSinIva(element.cantidad, element.producto.precio),
+            element.producto.tipoIva
+        ),
+    };
+
+    return lineaTicket;
+}
+
+export function calcularSoloIva(precioConIva: number, precioSinIva: number): number {
+    return parseFloat((precioConIva - precioSinIva).toFixed(2));
+}
+
+function crearResumenTotalTicket(lineaTicket: ResultadoLineaTicket): ResultadoTotalTicket {
+    return {
+        totalSinIva: lineaTicket.precionSinIva,
+        totalConIva: lineaTicket.precioConIva,
+        totalIva: calcularSoloIva(lineaTicket.precioConIva, lineaTicket.precionSinIva),
+    };
+}
+
 //funcion para iterar por cada producto
 // rellenando la interface de "resultadoLineaTiket"
 function calculaTiket (lineasTicket: LineaTicket[]) {
-    for (let i = 0; i < lineasTicket.length; i++) {
-        const element = lineasTicket[i];
-        let lineaTiket: ResultadoLineaTicket = { nombre: "", cantidad: 0, precionSinIva: 0, tipoIva: "general", precioConIva: 0 }
-        // asignamos valores que nos pasan de serie, como nombre, cantidad, TipoIva
-        lineaTiket.nombre = element.producto.nombre
-        lineaTiket.cantidad = element.cantidad
-        lineaTiket.tipoIva = element.producto.tipoIva
+    lineasTicket.map((element) => {
+        // Crear línea del ticket
+        const lineaTiket = crearLineaTicket(element);
 
-        // calcular precio total sin IVA
-        lineaTiket.precionSinIva = lineaTiket.cantidad * element.producto.precio
-
-        // calcular precio total Con Iva
-        lineaTiket.precioConIva = calcularPrecioConIva(lineaTiket.precionSinIva, element.producto.tipoIva)
-        console.log(`Producto: ${lineaTiket.nombre}, Cantidad: ${lineaTiket.cantidad}, PrecioSinIva: ${lineaTiket.precionSinIva}, Iva: ${lineaTiket.tipoIva}, precio con Iva: ${lineaTiket.precioConIva}`)
-
-        //precio Solo IVA
-        let soloIva:number =  parseFloat((lineaTiket.precioConIva - lineaTiket.precionSinIva).toFixed(2));
-        //console.warn(soloIva)
+        console.log(`Producto: ${lineaTiket.nombre}, Cantidad: ${lineaTiket.cantidad}, PrecioSinIva: ${lineaTiket.precionSinIva}, Iva: ${lineaTiket.tipoIva}, PrecioConIva: ${lineaTiket.precioConIva}`)
 
         //meter el objeto obtenido anteriormente en un nuevo array que contendrá todas las lineas
-        ResultadoLineaTiket.push(lineaTiket)
+        ResultadoLineaTiket.push(lineaTiket);
 
         // meter los valores al array de "ResultadoTotalTicket"
-        let ResultadoTotalTicket:ResultadoTotalTicket = {totalSinIva: lineaTiket.precionSinIva, totalConIva: lineaTiket.precioConIva, totalIva: soloIva }
-        resultadosTotales.push(ResultadoTotalTicket)
-    }
+        const resumenTotal = crearResumenTotalTicket(lineaTiket);
+        resultadosTotales.push(resumenTotal);
+    })
 }
 
 calculaTiket(productos)
 //console.error(`solo los IVA´s ${IvaDeProductos[0].cuantia}`)
 
-function preparacionDeTiketFinal() {
-    let totalSinIva = 0;
-    let totalConIva = 0;
-    let totalIva = 0;
+function calcularTotalConIva(): number {
+    return ResultadoLineaTiket.reduce((total, linea) => total + linea.precioConIva, 0);
+}
 
-    ResultadoLineaTiket.forEach((linea) => {
-        // metemos cada linea en el array
-        tiketFinalObjeto.lineas.push(linea);
-        // aprovechamos para ir sacanbdo los valores ya sumados
-        totalSinIva += linea.precionSinIva;
-        totalConIva += linea.precioConIva;
-    });
+function calcularTotalSinIva(): number {
+    return ResultadoLineaTiket.reduce((total, linea) => total + linea.precionSinIva, 0);
+}
 
-    // Sumar desglose de IVA
-    IvaDeProductos.forEach((iva) => {
-        // metemos el desglose de los Iva´s
-        tiketFinalObjeto.desgloseIva.push(iva);
+function calculoTotalIVA(): number {
+    return IvaDeProductos.reduce((total, iva) => total + iva.cuantia, 0);
+}
 
-        //aprovechamos para sacar el total de IVA
-        totalIva += iva.cuantia;
-    });
+function preparacionDeTiketFinal(): void {
+    let totalSinIva = calcularTotalConIva();
+    let totalConIva = calcularTotalSinIva()
+    let totalIva = calculoTotalIVA()
 
     // metemos finalmente todos los totales
     tiketFinalObjeto.total = {
-        totalSinIva: totalSinIva,
+        totalSinIva: parseFloat(totalSinIva.toFixed(2)),
         totalConIva: totalConIva,
         totalIva: totalIva
     };

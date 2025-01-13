@@ -14,6 +14,21 @@ const puntuacionUsuario = document.getElementById("puntuacionUsuario")
 const mensajito = document.getElementById("mensajito")
 const puntuacionDOMCarta = document.getElementById("puntuacionDOMCarta")
 
+// funciones de Ayuda
+// Generador de numero del 1 al 12
+// retorna un numero del 1 al 12 (sin incluir el 7 ni el 8 ni el 9)
+export function generadorNumeroAleatorio(NumMax:number) {
+    let numeroAzar = Math.floor(Math.random() * NumMax) +1
+    // si el numero es mayor de 7 suma 2            // sota= 10 -- Caballo= 11 -- rey= 12
+    if (numeroAzar > 7) {
+        return numeroAzar + 2
+    } else {
+        return numeroAzar
+    }
+}
+function funcionPuntuacionNuevaCarta(cartaSeleccionada:number):number {
+    return cartaSeleccionada >= 10 ? 0.5 : cartaSeleccionada;
+}
 // Funcio para cambiar el mensajito
 function cambioMensajito(texto:string, modoTexto:number) {
     if (mensajito ) {
@@ -29,50 +44,56 @@ function cambioMensajito(texto:string, modoTexto:number) {
         }
     }
 }
-
 // Comprobador si ha pasado de 7,5
 function comprobador() {
-    if (puntuacionActual > 7.5 && botonRetirarse && botonDOMVolver && botonDameCarta) {
-        console.error(`te has pasado!!`)
-        // activamos y desactivamos botones
-        botonRetirarse.style.display = "none";
-        botonDameCarta.style.display = "none";
-        botonDOMVolver.style.display = "block";
-        // activar mensaje "game Over"
-        cambioMensajito("GAME OVER, te has pasado amigo", 0)
+    if ( botonRetirarse instanceof HTMLButtonElement && botonDameCarta instanceof HTMLButtonElement && botonDOMVolver instanceof HTMLButtonElement) {
+        if (puntuacionActual > 7.5) {
+            console.error(`te has pasado!!`)
+            // activamos y desactivamos botones
+            botonRetirarse.style.display = "none";
+            botonDameCarta.style.display = "none";
+            botonDOMVolver.style.display = "block";
+            // activar mensaje "game Over"
+            cambioMensajito("GAME OVER, te has pasado amigo", 0)
+        } else if (puntuacionActual == 7.5){
+            console.error(`LO HAS CLAVADO!!`)
+            // activamos y desactivamos botones
+            botonRetirarse.style.display = "none";
+            botonDameCarta.style.display = "none";
+            botonDOMVolver.style.display = "block";
+            // activar mensaje "game Over"
+            cambioMensajito("¡ Lo has clavado! ¡Enhorabuena!", 1)
+        }
     } 
-    else if (puntuacionActual == 7.5 && botonRetirarse && botonDOMVolver && botonDameCarta) {
-        console.error(`LO HAS CLAVADO!!`)
-        // activamos y desactivamos botones
-        botonRetirarse.style.display = "none";
-        botonDameCarta.style.display = "none";
-        botonDOMVolver.style.display = "block";
-        // activar mensaje "game Over"
-        cambioMensajito("¡ Lo has clavado! ¡Enhorabuena!", 1)
-    }
 }
-
-// Actualizacion de PTOS del usuario
-function actualizarPtosUsuario(cartaSeleccionada:number) {
-    if (cartaSeleccionada >= 10 ) {
-        puntuacionActual += 0.5
-    } else {
-        puntuacionActual += cartaSeleccionada
-    }
-    // Actualizar en DOM el numero
-    if (puntuacionUsuario !== undefined && puntuacionUsuario !== null) {
+function actualizarNumeroPuntosDOM() {
+    if (puntuacionUsuario ) {
         puntuacionUsuario.textContent = puntuacionActual.toString()
     } else {
-        console.log("algo ha pasado al sumar puntos al usuario")
+        console.log("algo ha pasado al actualizar los datos de los puntos")
     }
+}
+function sumarPuntos(ptosASumar:number):number {
+    return puntuacionActual += ptosASumar
+}
+// Actualizacion de PTOS del usuario
+function actualizarPtosUsuario(cartaSeleccionada:number) {
+    const puntuacionDeLaNuevaCarta = funcionPuntuacionNuevaCarta(cartaSeleccionada)
+    console.log(`ha consegiuido ${puntuacionDeLaNuevaCarta} puntos`)
+
+    // sumar puntos
+    sumarPuntos(puntuacionDeLaNuevaCarta)
+    
+    // Actualizar en DOM el numero
+    actualizarNumeroPuntosDOM()
+
     console.warn(`actualmente tienes ${puntuacionActual} puntos`)
     // comprobar si ha pasado de 7,5()
-     comprobador()
+    comprobador()
 }
-
 //actualizar Imagen de la carta
 function mostrarCarta(cartaSeleccionada:number) {
-    if (imgCarta !== undefined && imgCarta !== null) {
+    if (imgCarta) {
         switch (cartaSeleccionada) {
             case 1:
                 imgCarta.src = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/1_as-copas.jpg"
@@ -112,105 +133,110 @@ function mostrarCarta(cartaSeleccionada:number) {
  
     }
 }
-
-// Actualizacion de nueva carta
-function actualizarCarta(cartaSeleccionada:number) {
-    if (cartaSeleccionada >= 10 ) {
-        puntuacionNuevaCarta = 0.5
-    } else {
-        puntuacionNuevaCarta = cartaSeleccionada
-    }
+// actualizacion DOM de la carta
+function actualizarPuntosCartaDOM() {
     //Actualizacion de DOM
-    if (puntuacionDOMCarta !== undefined && puntuacionDOMCarta !== null) {
+    if (puntuacionDOMCarta) {
         puntuacionDOMCarta.textContent = puntuacionNuevaCarta.toString()
     } else{
         console.log("algo ha pasado al actualizar los datos de la carta")
     }
+}
+// Actualizacion de nueva carta
+function actualizarCarta(cartaSeleccionada:number) {
+    funcionPuntuacionNuevaCarta(cartaSeleccionada);
+    
+    actualizarPuntosCartaDOM()
+
     mostrarCarta(cartaSeleccionada)
 }
 
 // Dame carta
-if (botonDameCarta) {
-    botonDameCarta.addEventListener("click", () => {
-        // elige un numero del 1 al 10 y lo capturamos en una variable
-        let sacaNumero = Math.floor(Math.random() * 10) +1
-
-        // si el numero es mayor de 7 suma 2            // sota= 10 -- Caballo= 11 -- rey= 12
-        if (sacaNumero > 7) {
-            carta = sacaNumero + 2
-        } else {
-            carta = sacaNumero
-        }
-
-        console.log(`ha salido la carta ${carta}`)
-
-        // ejecutamos funcion de actualizar ptos del usuario si esta en pleno juego
-        actualizarPtosUsuario(carta)
-
-        // ejecutamos funcion de actualizar la imagen y los punos
-        actualizarCarta(carta)
-    });
+if (botonDameCarta instanceof HTMLButtonElement ) {
+    botonDameCarta.addEventListener("click", () => { dameCarta() });
 }
+function dameCarta() {
+    // elige un numero del 1 al 10 y lo capturamos en una variable
+    carta = generadorNumeroAleatorio(10)
+    console.log(`ha salido la carta ${carta}`)
 
-// Siguiente carta
+    // ejecutamos funcion de actualizar ptos del usuario si esta en pleno juego
+    actualizarPtosUsuario(carta)
+
+    // ejecutamos funcion de actualizar la imagen y los punos
+    actualizarCarta(carta)
+}
+    
+// Siguiente carta (que habria pasado?)
 if (botonDOMSiguienteCarta) {
-    botonDOMSiguienteCarta.addEventListener("click", () => {
-        // elige un numero del 1 al 10 y lo capturamos en una variable
-        let sacaNumero = Math.floor(Math.random() * 10) +1
-
-        // si el numero es mayor de 7 suma 2            // sota= 10 -- Caballo= 11 -- rey= 12
-        if (sacaNumero > 7) {
-            carta = sacaNumero + 2
-        } else {
-            carta = sacaNumero
-        }
-        // ejecutamos funcion de actualizar la imagen y los punos
-        actualizarCarta(carta)
-    })
+    botonDOMSiguienteCarta.addEventListener("click", () => { siguienteCarta() });
 }
+function siguienteCarta() {
+    // elige un numero del 1 al 10 y lo capturamos en una variable
+    carta = generadorNumeroAleatorio(10)
+
+    console.warn(`ha salido la carta ${carta}`)
+
+    // ejecutamos funcion de actualizar la imagen y los punos
+    actualizarCarta(carta)
+}
+
 
 // Boton Volver
 if (botonDOMVolver) {
-    botonDOMVolver.addEventListener("click", () => {
-        
-        if (puntuacionUsuario && botonDameCarta && botonDOMSiguienteCarta && botonRetirarse) {
-            // resetear puntos actuales
-            puntuacionActual = 0
-            puntuacionUsuario.textContent = puntuacionActual.toString();
-            botonDameCarta.style.display = "block";
-            botonDOMSiguienteCarta.style.display = "none"
-            botonDOMVolver.style.display = "none"
-            botonRetirarse.style.display = "block"
-        }
-
-        // resetear carta
-        actualizarCarta(0)
-        mostrarCarta(0)
-
-        // resetear mensaje
-        cambioMensajito("no te pases de 7,5", 2)
-    })
+    botonDOMVolver.addEventListener("click", () => { volver() });
 }
+function resetearFront():void {
+    if (puntuacionUsuario && botonDameCarta instanceof HTMLButtonElement && botonDOMSiguienteCarta instanceof HTMLButtonElement && botonDOMVolver instanceof HTMLButtonElement && botonRetirarse instanceof HTMLButtonElement) {
+        // resetear puntos actuales
+        puntuacionActual = 0
+        puntuacionUsuario.textContent = puntuacionActual.toString();
+        botonDameCarta.style.display = "block";
+        botonDOMSiguienteCarta.style.display = "none"
+        botonDOMVolver.style.display = "none"
+        botonRetirarse.style.display = "block"
+    }
+}
+function volver():void {        
+    resetearFront()
+
+    // resetear carta
+    actualizarCarta(0)
+    mostrarCarta(0)
+
+    // resetear mensaje
+    cambioMensajito("no te pases de 7,5", 2)
+}
+
 
 // boton Retirarse
 if (botonDOMRetirarse) {
-    botonDOMRetirarse.addEventListener("click", () => {
-        if (puntuacionActual <= 4) {
-            cambioMensajito("Has sido muy conservador", 1 )
-        } else if (puntuacionActual > 4 && puntuacionActual <= 5) {
-            cambioMensajito("Te ha entrado el canguelo eh?", 1)
-        } else if (puntuacionActual > 5 && puntuacionActual <= 7) {
-            
-        } else {
-            cambioMensajito("No deberias ver esto", 3)
-        }
-
-        if (botonRetirarse && botonDameCarta && botonDOMVolver && botonDOMSiguienteCarta) {
-            botonRetirarse.style.display = "none";
-            botonDameCarta.style.display = "none";
-            botonDOMSiguienteCarta.style.display = "block"
-            botonDOMVolver.style.display = "block";
-        }
-        
-    })
+    botonDOMRetirarse.addEventListener("click", () => { retirarse() });
 }
+function comprobarRetirada() {
+    if (puntuacionActual <= 4) {
+        cambioMensajito("Has sido muy conservador", 1 )
+    } else if (puntuacionActual > 4 && puntuacionActual <= 5) {
+        cambioMensajito("Te ha entrado el canguelo eh?", 1)
+    } else if (puntuacionActual > 5 && puntuacionActual <= 7) {
+        
+    } else {
+        cambioMensajito("No deberias ver esto", 3)
+    }
+}
+function cambiarBotones() {
+    if (botonRetirarse instanceof HTMLButtonElement && botonDameCarta instanceof HTMLButtonElement && botonDOMSiguienteCarta instanceof HTMLButtonElement && botonDOMVolver instanceof HTMLButtonElement) {
+        botonRetirarse.style.display = "none";
+        botonDameCarta.style.display = "none";
+        botonDOMSiguienteCarta.style.display = "block"
+        botonDOMVolver.style.display = "block";
+    }
+}
+function retirarse() {
+    comprobarRetirada()
+
+    // desactivamos botones
+    cambiarBotones()
+}
+        
+
