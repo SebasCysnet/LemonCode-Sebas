@@ -1,8 +1,7 @@
 import "./style.css";
 
 import { cartas, parejaAComprobar } from "./model";
-import { iniciarPartida } from "./ui";
-import { voltearCarta, sonPareja } from "./motor";
+import { iniciarPartida, voltearCarta, comprobarParejas } from "./ui";
 
 //4- Pasamos por consola las cartas ya barajadas
 console.log(cartas)
@@ -22,6 +21,7 @@ if (botonDOMIniciarPartida instanceof HTMLButtonElement) {
         iniciarPartida ();
     })
 }
+// reiniciar partida
 if (botonDOMReiniciarPartida instanceof HTMLButtonElement) {
     botonDOMReiniciarPartida.addEventListener("click", () => {
         location.reload();
@@ -31,16 +31,11 @@ if (botonDOMReiniciarPartida instanceof HTMLButtonElement) {
 // voltear carta
 // Con forEach, iteramos sobre cada carta del NodeList y le agregamos un listener de "clic"
 //1- capturamos que elemento ha echo click y se lo pasamos a UI para gestionarlo
-cartasDOM.forEach((carta) => {
-        carta.addEventListener("click", () => {
-            const index = parseInt(carta.getAttribute("data-index") || "0", 10)
-            console.log(`Main - volteamos la carta ${index + 1} del DOM`)
-            voltearCarta(index)
-            if (parejaAComprobar.length == 2) {
-                setTimeout(sonPareja, 300)
-            } else {
-                console.warn("... Quieres comparar esta pareja con ...")
-            }
-        })
+cartasDOM.forEach((carta) => {carta.addEventListener("click", () => {
+    const index = parseInt(carta.getAttribute("data-index") || "0", 10)
+    console.log(`Main - volteamos la carta ${index + 1} del DOM`)
+    voltearCarta(index) // encontramos la carta seleccionada, verifica la carta si ya esta volteada 
+    comprobarParejas(parejaAComprobar)
+})
 })
 
